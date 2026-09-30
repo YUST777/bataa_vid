@@ -254,13 +254,15 @@ def frame(t, with_pet=True):
             pet(L, PET_HOME, 230, squash=sq, shadow=t > 3, kind="front", idx=0 if t < 4 else (t // 2) % 24)
         elif t < 132:                                # idle, facing the menu; leans toward it while guiding
             bob = 3 * math.sin(t * 0.18)
-            lean = 6 * ss(70, 85, t) * (1 - ss(118, 128, t))
-            pet(L, (PET_HOME[0], PET_HOME[1] + bob), 230, rot=-lean, flip=True, kind="idle", idx=(t // 2) % 24)
+            if 72 <= t < 122:                         # points its wing at the menu while guiding
+                pet(L, (PET_HOME[0], PET_HOME[1] + bob), 230, flip=True, kind="point", idx=min((t - 72) // 2, 11) if t < 94 else 8 + (t // 3) % 4)
+            else:
+                pet(L, (PET_HOME[0], PET_HOME[1] + bob), 230, flip=True, kind="idle", idx=(t // 2) % 24)
         elif t < 152:                                # waddles to the new cube
             k = ss(132, 150, t)
             pet(L, lerp(PET_HOME, PET_NEAR, k), 230, flip=True, kind="walk", idx=t % 16)
         elif t < 162:
-            pet(L, PET_NEAR, 230, flip=True, kind="happy", squash=1 + 0.05 * math.sin((t - 152) * 0.9))
+            pet(L, PET_NEAR, 230, flip=True, kind="cheer", idx=(t - 152) % 8)
         elif t < 192:                                # turns to the viewer
             pet(L, PET_NEAR, 230, kind="front", idx=(t // 2) % 24)
         else:                                        # anticipation: squash + glow, then 3D takes over

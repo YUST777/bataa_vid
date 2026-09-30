@@ -46,11 +46,47 @@ def load_duck(scene, scale=1.0, name="Bataa"):
         attach(obs[n], legL)
     for n in ("Leg_R", "Foot_R"):
         attach(obs[n], legR)
-    for e in (root, body, head, legL, legR):
+    wings = {}
+    for sgn, sfx in ((1, "L"), (-1, "R")):
+        w_ = empty("wing" + sfx, (sgn * 0.285, -0.10, 0.515), body)
+        wings[sfx] = w_
+        bpy.context.view_layer.update()
+        wm = make_wing(f"{name}_Wing_{sfx}", sgn, obs["Body"].data.materials[0])
+        c.objects.link(wm)
+        wm.parent = w_
+    for e in (root, body, head, legL, legR, wings["L"], wings["R"]):
         e.rotation_mode = 'XYZ'
     root.scale = (scale,) * 3
     return {"coll": c, "root": root, "body": body, "head": head, "legL": legL, "legR": legR,
-            "eyes": [obs["Eye_L"], obs["Eye_R"]], "parts": obs}
+            "wingL": wings["L"], "wingR": wings["R"], "eyes": [obs["Eye_L"], obs["Eye_R"]], "parts": obs}
+
+
+def make_wing(name, sgn, mat):
+    """Soft teardrop wing, origin at the shoulder, lying back along the body side (+Y), editable quads + subsurf."""
+    import bmesh, math
+    bm = bmesh.new()
+    bmesh.ops.create_cube(bm, size=2.0)
+    bmesh.ops.subdivide_edges(bm, edges=bm.edges[:], cuts=6, use_grid_fill=True)
+    for v in bm.verts:
+        d = v.co.normalized()
+        t = (d.y + 1) / 2                                  # 0 front .. 1 tip
+        w = 0.115 * (1 - 0.70 * t ** 1.5) * (0.6 + 0.4 * math.sin(math.pi * min(t * 1.3, 1)))
+        th = 0.045 * (1 - 0.55 * t)
+        y = 0.02 + t * 0.36
+        z = d.z * w - 0.15 * t - 0.02
+        x = sgn * (d.x * th + 0.03 - 0.06 * t * t)
+        v.co = (x, y, z)
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    me.polygons.foreach_set("use_smooth", [True] * len(me.polygons)); me.materials.append(mat)
+    ob = bpy.data.objects.new(name, me)
+    sub = ob.modifiers.new("Subdivision", 'SUBSURF'); sub.levels = sub.render_levels = 2
+    return ob
+
+
+def wing_pose(ctl, sfx, open_deg, fan_deg=0.0, twist_deg=0.0):
+    import math
+    sgn = 1 if sfx == "L" else -1
+    ctl["wing" + sfx].rotation_euler = (math.radians(twist_deg), -sgn * math.radians(open_deg), -sgn * math.radians(fan_deg))
 
 
 def pose_waddle(ctl, phase, amp=1.0, bob=True):

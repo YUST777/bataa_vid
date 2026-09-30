@@ -1,7 +1,7 @@
 """Headless: render Bataa sprite sets (transparent PNG) for the on-screen pet."""
 import bpy, sys, os, math
 sys.path.insert(0, os.path.dirname(__file__))
-from duck_rig_v2 import load_duck, pose_waddle, pose_idle, blink
+from duck_rig_v2 import load_duck, pose_waddle, pose_idle, blink, wing_pose
 from mathutils import Vector
 
 OUT = "/home/yousefmsm1/Desktop/blender/bataa_ad/sprites"
@@ -49,6 +49,20 @@ for i in range(24):
     pose_idle(ctl, i / 24); blink(ctl, 1.0 if i in (15, 16) else (0.5 if i in (14, 17) else 0.0))
     bpy.context.view_layer.update(); shot(f"front_{i:02d}")
 blink(ctl, 0); pose_idle(ctl, 0)
+# point: near-camera (right) wing raised toward the menu, head follows
+view(-40, 0.18)
+for i in range(12):
+    pose_idle(ctl, i / 12); k = min(1, i / 4)
+    wing_pose(ctl, "R", 75 * k, 38 * k + 4 * math.sin(i), 0); wing_pose(ctl, "L", 8 * k)
+    ctl["head"].rotation_euler.z -= math.radians(18 * k)
+    bpy.context.view_layer.update(); shot(f"point_{i:02d}")
+# cheer: both wings flap
+for i in range(8):
+    pose_idle(ctl, 0); o = 70 + 55 * math.sin(2 * math.pi * i / 8)
+    wing_pose(ctl, "L", o, 15); wing_pose(ctl, "R", o, 15)
+    ctl["head"].rotation_euler = (math.radians(-12), 0, 0); ctl["body"].location.z = 0.12 + 0.05 * abs(math.sin(math.pi * i / 8))
+    bpy.context.view_layer.update(); shot(f"cheer_{i:02d}")
+wing_pose(ctl, "L", 0); wing_pose(ctl, "R", 0); pose_idle(ctl, 0)
 # happy: wings out -> use body squash + head up
 ctl["head"].rotation_euler = (math.radians(-14), 0, 0); ctl["body"].scale = (1.04, 1.04, 0.95)
 bpy.context.view_layer.update(); view(-40, 0.18); shot("happy")

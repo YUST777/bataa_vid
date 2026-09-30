@@ -508,6 +508,10 @@ droplets(428, PmH + SN * 0.03, 8, 0.10, 14)
 for f, hid in ((1, False), (52, True), (411, True), (412, False), (510, False)):
     mem.hide_render = hid; mem.keyframe_insert("hide_render", frame=f)
 
+# ---- performance pass (overrides all per-part keys above)
+import duck_acting
+duck_acting.animate(duck)
+droplets(46, LAND + Vector((0, 0, 0.09)), 10, 0.16, 16)      # glass flicked off during the shake
 # ------------------------------------------------------------------ build-up: clay -> real (per object "build")
 clay = bpy.data.materials.new("Clay"); clay.use_nodes = True
 cp = clay.node_tree.nodes["Principled BSDF"]
@@ -601,8 +605,8 @@ keys = [  # frame, cam, target, lens
     (1, P0, S, LENS0), (8, P0 + SN * 0.03, S, LENS0), (26, P0 + SN * 0.42 + SU * 0.02 + SR * 0.10, S + SU * -0.12 + SR * 0.12, 42),
     (60, Vector((0.05, -1.05, 1.22)), Vector((-0.1, 0.1, 1.08)), 38),
     (120, Vector((0.62, -0.95, 1.18)), Vector((-0.18, 0.18, 1.02)), 32),
-    (210, Vector((1.15, -1.7, 1.45)), Vector((-0.25, 0.15, 1.02)), 28),
-    (360, Vector((0.45, -2.0, 1.42)), Vector((-0.25, 0.2, 1.02)), 28),
+    (210, Vector((0.80, -1.30, 1.30)), Vector((-0.10, 0.02, 1.0)), 30),
+    (300, Vector((0.25, -1.18, 1.22)), Vector((-0.02, -0.02, 1.0)), 34), (360, Vector((-0.15, -1.30, 1.28)), Vector((-0.12, 0.08, 1.02)), 32),
     (440, Vector((-0.2, -1.55, 1.36)), S + Vector((0, 0, -0.03)), 40),
     (500, P0 + SN * 0.04, S, LENS0), (510, P0, S, LENS0)]
 for f, p, t, l in keys:
