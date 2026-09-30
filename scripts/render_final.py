@@ -12,6 +12,13 @@ def arg(name, default):
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sc = bpy.context.scene
+MISSING = []
+class Safe:
+    def __init__(self, o): object.__setattr__(self, "_o", o)
+    def __getattr__(self, k): return getattr(self._o, k)
+    def __setattr__(self, k, v):
+        try: setattr(self._o, k, v)
+        except (AttributeError, TypeError) as e: MISSING.append(f"{k}: {e}")
 preview = "--preview" in args
 fast = "--fast" in args          # < 1 h target: fewer samples, AI denoiser does the rest
 sc.frame_start, sc.frame_end = arg("--start", 1), arg("--end", 510)
@@ -32,7 +39,7 @@ for backend in ("OPTIX", "CUDA", "HIP", "METAL"):
 print("RENDER DEVICES:", [(d.name, d.type) for d in cp.devices if d.use])
 
 sc.render.engine = 'CYCLES'
-cy = sc.cycles
+cy = Safe(sc.cycles)
 cy.device = 'GPU'
 cy.feature_set = 'SUPPORTED'
 # ---------------- sampling: adaptive + AI denoise (OptiX denoiser runs on the same GPU, albedo+normal guided)
@@ -45,7 +52,7 @@ cy.use_denoising = True
 cy.denoiser = 'OPTIX'
 cy.denoising_input_passes = 'RGB_ALBEDO_NORMAL'
 cy.denoising_prefilter = 'ACCURATE'
-cy.denoising_quality = 'HIGH' if hasattr(cy, "denoising_quality") else None
+cy.denoising_quality = 'HIGH'
 cy.sample_offset = 0
 cy.seed = 0
 cy.use_animated_seed = True            # grain changes per frame -> denoiser flicker turns into fine film grain, not crawling blotches
@@ -75,7 +82,6 @@ sc.render.resolution_percentage = 50 if preview else 100
 sc.render.use_motion_blur = True
 sc.render.motion_blur_position = 'CENTER'
 sc.render.motion_blur_shutter = 0.45
-cy.motion_blur_position = 'CENTER' if hasattr(cy, "motion_blur_position") else None
 sc.render.film_transparent = False
 cy.film_exposure = 1.0
 cy.pixel_filter_type = 'BLACKMAN_HARRIS'
@@ -92,6 +98,23 @@ sc.render.image_settings.compression = 15
 sc.render.use_overwrite = False
 sc.render.use_placeholder = True
 sc.render.use_file_extension = True
-print(f"RENDER {sc.frame_start}-{sc.frame_end} -> {out}  samples={cy.samples} thr={cy.adaptive_threshold}")
+if "--eevee" in args:                    # minimal real-time profile: seconds per frame even on small GPUs
+    sc.render.engine = 'BLENDER_EEVEE'
+    ee = Safe(sc.eevee)
+    ee.taa_render_samples = arg("--samples", 24)
+    ee.use_raytracing = False             # glass is a shader trick, no refraction rays needed
+    ee.use_shadows = True
+    ee.shadow_ray_count = 1; ee.shadow_step_count = 4
+    ee.fast_gi_method = 'GLOBAL_ILLUMINATION'
+    ee.use_volumetric_shadows = False
+    sc.render.use_motion_blur = True
+    sc.render.motion_blur_shutter = 0.35
+    try: ee.motion_blur_steps = 1
+    except Exception: pass
+    sc.render.image_settings.color_depth = '8'
+    out = os.path.join(ROOT, "renders", "3d")
+    sc.render.filepath = os.path.join(out, "f_####")
+print("SKIPPED SETTINGS:", MISSING)
+print(f"RENDER {sc.frame_start}-{sc.frame_end} -> {out}  engine={sc.render.engine}")
 bpy.ops.render.render(animation=True)
 print("RENDER DONE")

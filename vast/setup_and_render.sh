@@ -9,10 +9,12 @@ WORK=/home/yousefmsm1/Desktop/blender          # scripts use this absolute path
 REPO=https://github.com/YUST777/bataa_vid.git
 
 apt-get update -qq && apt-get install -y -qq git wget xz-utils ffmpeg python3-pip \
-  libxi6 libxxf86vm1 libxfixes3 libxrender1 libxkbcommon0 libsm6 libgl1 libegl1 >/dev/null
+  libxi6 libxxf86vm1 libxfixes3 libxrender1 libxkbcommon0 libsm6 libgl1 libegl1 libglvnd0 libopengl0 >/dev/null
 pip3 install -q pillow numpy fonttools
 
-PROFILE=${PROFILE:---fast}          # --fast (< 1 h on 2x 5090) or "" for max quality
+PROFILE=${PROFILE:---eevee}         # --eevee (minimal, ~minutes) | --fast (Cycles) | "" (Cycles max quality)
+# EEVEE needs the NVIDIA OpenGL/EGL driver inside the container: rent with env NVIDIA_DRIVER_CAPABILITIES=all
+export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/10_nvidia.json
 mkdir -p "$WORK" && cd "$WORK"
 [ -d bataa_ad/.git ] || git clone -q "$REPO" bataa_ad
 cp -n bataa_ad/assets/bataa.png "$WORK/bataa.png"
