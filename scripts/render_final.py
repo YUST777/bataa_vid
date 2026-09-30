@@ -13,6 +13,7 @@ def arg(name, default):
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sc = bpy.context.scene
 preview = "--preview" in args
+fast = "--fast" in args          # < 1 h target: fewer samples, AI denoiser does the rest
 sc.frame_start, sc.frame_end = arg("--start", 1), arg("--end", 510)
 
 # ---------------- device: every OptiX GPU visible to this process (CUDA_VISIBLE_DEVICES picks one per process)
@@ -36,9 +37,9 @@ cy.device = 'GPU'
 cy.feature_set = 'SUPPORTED'
 # ---------------- sampling: adaptive + AI denoise (OptiX denoiser runs on the same GPU, albedo+normal guided)
 cy.use_adaptive_sampling = True
-cy.samples = 96 if preview else 512
-cy.adaptive_threshold = 0.03 if preview else 0.008
-cy.adaptive_min_samples = 16 if preview else 64
+cy.samples = 96 if preview else (160 if fast else 512)
+cy.adaptive_threshold = 0.03 if preview else (0.02 if fast else 0.008)
+cy.adaptive_min_samples = 16 if preview else (24 if fast else 64)
 cy.time_limit = 0
 cy.use_denoising = True
 cy.denoiser = 'OPTIX'
@@ -50,17 +51,17 @@ cy.seed = 0
 cy.use_animated_seed = True            # grain changes per frame -> denoiser flicker turns into fine film grain, not crawling blotches
 # ---------------- light paths: interior + glass + emissive screens
 cy.use_light_tree = True
-cy.max_bounces = 10
-cy.diffuse_bounces = 4
-cy.glossy_bounces = 4
-cy.transmission_bounces = 10
-cy.transparent_max_bounces = 24         # card + membrane + droplets stack up
+cy.max_bounces = 8 if fast else 10
+cy.diffuse_bounces = 2 if fast else 4        # interior GI still reads with 2 + light tree
+cy.glossy_bounces = 3 if fast else 4
+cy.transmission_bounces = 8 if fast else 10  # glass membrane + droplets need depth
+cy.transparent_max_bounces = 16 if fast else 24         # card + membrane + droplets stack up
 cy.volume_bounces = 0
 cy.caustics_reflective = False
 cy.caustics_refractive = False
 cy.blur_glossy = 1.0
 cy.sample_clamp_direct = 0.0
-cy.sample_clamp_indirect = 6.0          # kills fireflies from the window/sun bouncing off glossy desk
+cy.sample_clamp_indirect = 3.0 if fast else 6.0          # kills fireflies from the window/sun bouncing off glossy desk
 cy.light_sampling_threshold = 0.01
 # ---------------- performance
 sc.render.use_persistent_data = True    # keeps BVH/textures between frames: large win for a 510-frame shot
