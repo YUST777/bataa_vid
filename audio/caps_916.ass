@@ -1,0 +1,60 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Inter,78,&H00FFFFFF,&H00FFFFFF,&H00141414,&H64000000,-1,0,0,0,100,100,0,0,1,7.0,3.9,2,60,60,420,1
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.25,0:00:00.55,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}MEET{\c&HFFFFFF&} BATAA,
+Dialogue: 0,0:00:00.55,0:00:01.30,Cap,,0,0,0,,MEET {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}BATAA,{\c&HFFFFFF&}
+Dialogue: 0,0:00:01.23,0:00:01.48,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}YOUR{\c&HFFFFFF&} AI MENTOR
+Dialogue: 0,0:00:01.48,0:00:01.77,Cap,,0,0,0,,YOUR {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}AI{\c&HFFFFFF&} MENTOR
+Dialogue: 0,0:00:01.77,0:00:02.38,Cap,,0,0,0,,YOUR AI {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}MENTOR{\c&HFFFFFF&}
+Dialogue: 0,0:00:02.21,0:00:02.67,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}INSIDE{\c&HFFFFFF&} THE APPS
+Dialogue: 0,0:00:02.67,0:00:02.79,Cap,,0,0,0,,INSIDE {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}THE{\c&HFFFFFF&} APPS
+Dialogue: 0,0:00:02.79,0:00:03.25,Cap,,0,0,0,,INSIDE THE {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}APPS{\c&HFFFFFF&}
+Dialogue: 0,0:00:03.04,0:00:03.18,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}YOU{\c&HFFFFFF&} LEARN.
+Dialogue: 0,0:00:03.18,0:00:04.08,Cap,,0,0,0,,YOU {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}LEARN.{\c&HFFFFFF&}
+Dialogue: 0,0:00:03.95,0:00:04.12,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}IT{\c&HFFFFFF&} SHOWS YOU
+Dialogue: 0,0:00:04.12,0:00:04.40,Cap,,0,0,0,,IT {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}SHOWS{\c&HFFFFFF&} YOU
+Dialogue: 0,0:00:04.40,0:00:04.73,Cap,,0,0,0,,IT SHOWS {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}YOU{\c&HFFFFFF&}
+Dialogue: 0,0:00:04.57,0:00:05.12,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}EXACTLY{\c&HFFFFFF&} WHERE TO
+Dialogue: 0,0:00:05.12,0:00:05.32,Cap,,0,0,0,,EXACTLY {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}WHERE{\c&HFFFFFF&} TO
+Dialogue: 0,0:00:05.32,0:00:05.62,Cap,,0,0,0,,EXACTLY WHERE {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}TO{\c&HFFFFFF&}
+Dialogue: 0,0:00:05.42,0:00:06.34,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}CLICK...{\c&HFFFFFF&}
+Dialogue: 0,0:00:07.65,0:00:07.96,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}BUT{\c&HFFFFFF&} BATAA DOESN'T
+Dialogue: 0,0:00:07.96,0:00:08.46,Cap,,0,0,0,,BUT {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}BATAA{\c&HFFFFFF&} DOESN'T
+Dialogue: 0,0:00:08.46,0:00:08.97,Cap,,0,0,0,,BUT BATAA {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}DOESN'T{\c&HFFFFFF&}
+Dialogue: 0,0:00:08.77,0:00:09.01,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}JUST{\c&HFFFFFF&} LIVE ON
+Dialogue: 0,0:00:09.01,0:00:09.23,Cap,,0,0,0,,JUST {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}LIVE{\c&HFFFFFF&} ON
+Dialogue: 0,0:00:09.23,0:00:09.55,Cap,,0,0,0,,JUST LIVE {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}ON{\c&HFFFFFF&}
+Dialogue: 0,0:00:09.35,0:00:09.51,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}YOUR{\c&HFFFFFF&} SCREEN.
+Dialogue: 0,0:00:09.51,0:00:10.45,Cap,,0,0,0,,YOUR {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}SCREEN.{\c&HFFFFFF&}
+Dialogue: 0,0:00:10.45,0:00:10.74,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}EVERY{\c&HFFFFFF&} STEP YOU
+Dialogue: 0,0:00:10.74,0:00:10.97,Cap,,0,0,0,,EVERY {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}STEP{\c&HFFFFFF&} YOU
+Dialogue: 0,0:00:10.97,0:00:11.30,Cap,,0,0,0,,EVERY STEP {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}YOU{\c&HFFFFFF&}
+Dialogue: 0,0:00:11.11,0:00:11.58,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}TAKE,{\c&HFFFFFF&}
+Dialogue: 0,0:00:11.36,0:00:11.52,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}YOU{\c&HFFFFFF&} BUILD FOR
+Dialogue: 0,0:00:11.52,0:00:11.77,Cap,,0,0,0,,YOU {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}BUILD{\c&HFFFFFF&} FOR
+Dialogue: 0,0:00:11.77,0:00:12.16,Cap,,0,0,0,,YOU BUILD {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}FOR{\c&HFFFFFF&}
+Dialogue: 0,0:00:11.98,0:00:12.79,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}REAL.{\c&HFFFFFF&}
+Dialogue: 0,0:00:13.20,0:00:14.02,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}BLENDER.{\c&HFFFFFF&}
+Dialogue: 0,0:00:14.15,0:00:14.96,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}UNITY.{\c&HFFFFFF&}
+Dialogue: 0,0:00:14.99,0:00:16.10,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}GODOT.{\c&HFFFFFF&}
+Dialogue: 0,0:00:16.20,0:00:16.52,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}ANY{\c&HFFFFFF&} APP.
+Dialogue: 0,0:00:16.52,0:00:17.10,Cap,,0,0,0,,ANY {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}APP.{\c&HFFFFFF&}
+Dialogue: 0,0:00:17.18,0:00:17.41,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}LEARN{\c&HFFFFFF&} IT BY
+Dialogue: 0,0:00:17.41,0:00:17.51,Cap,,0,0,0,,LEARN {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}IT{\c&HFFFFFF&} BY
+Dialogue: 0,0:00:17.51,0:00:17.86,Cap,,0,0,0,,LEARN IT {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}BY{\c&HFFFFFF&}
+Dialogue: 0,0:00:17.67,0:00:18.63,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}DOING.{\c&HFFFFFF&}
+Dialogue: 0,0:00:19.30,0:00:19.70,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}STOP{\c&HFFFFFF&} WATCHING TUTORIALS.
+Dialogue: 0,0:00:19.70,0:00:20.04,Cap,,0,0,0,,STOP {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}WATCHING{\c&HFFFFFF&} TUTORIALS.
+Dialogue: 0,0:00:20.04,0:00:20.99,Cap,,0,0,0,,STOP WATCHING {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}TUTORIALS.{\c&HFFFFFF&}
+Dialogue: 0,0:00:20.79,0:00:21.08,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}START{\c&HFFFFFF&} BUILDING.
+Dialogue: 0,0:00:21.08,0:00:22.01,Cap,,0,0,0,,START {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}BUILDING.{\c&HFFFFFF&}
+Dialogue: 0,0:00:22.30,0:00:22.80,Cap,,0,0,0,,{\fad(60,0)}{\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}BATAA{\c&HFFFFFF&} DOT APP.
+Dialogue: 0,0:00:22.80,0:00:23.08,Cap,,0,0,0,,BATAA {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}DOT{\c&HFFFFFF&} APP.
+Dialogue: 0,0:00:23.08,0:00:23.85,Cap,,0,0,0,,BATAA DOT {\c&H136AFF&\fscx112\fscy112\t(0,90,\fscx100\fscy100)}APP.{\c&HFFFFFF&}
